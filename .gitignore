@@ -27,6 +27,9 @@ pip-log.txt
 .tox
 nosetests.xml
 
+# pickled objects
+*.p
+
 # Translations
 *.mo
 
@@ -34,3 +37,6 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+# Data Directories
+data
