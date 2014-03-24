@@ -1,4 +1,3 @@
-
 import Quandl
 
 
@@ -28,7 +27,5 @@ class Fundamentals(object):
         
     def all_stats(self, **kwargs):
         return self.get('ALLFINANCIALRATIOS', **kwargs)
-
-        
 
         

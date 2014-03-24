@@ -1,7 +1,7 @@
 
 import pandas as pd
 
-from . settings import CODE_DIR
+from .. settings import CODE_DIR
 
 
 

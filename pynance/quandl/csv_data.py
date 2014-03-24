@@ -1,4 +1,5 @@
 #The MIT License (MIT)
+#
 #Copyright (c) 2014 David Edwards
 #
 #Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,12 +25,9 @@ import time
 
 import pandas as pd
 
-from . settings import (
+from .. settings import (
     COMPANY_DIR, DATE_DIR, FIELD_DIR, all_files
 )
-from . fundamentals import Fundamentals
-
-
 
 class DataManager:
     '''
@@ -142,3 +140,5 @@ class DataManager:
             path = self.field_dir + i + '.csv'
             dff = pd.DataFrame(df[i]).T
             dff.to_csv(path, index_label='Ticker')
+
+

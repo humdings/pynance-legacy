@@ -22,7 +22,7 @@ from pynance import *
 >>>
 >>>
 >>> # Make a portfolio of historical data
->>> P = Portfolio(['MMM', 'DD', 'AA'], '2014-02-01','2014-03-01') # date time objects work too
+>>> P = Portfolio(['MMM', 'DD', 'AA'], '2014-02-01','2014-03-01') # datetime objects work too
 >>> P.prices
                AA     DD     MMM
 Date                            
@@ -97,6 +97,43 @@ short_ratio                           5.7        6      1.9
 stock_exchange                       NYSE     NYSE     NYSE
 two_hundred_day_moving_avg         9.9507  61.7791   128.22
 volume                       3.242145e+07  6827455  5920375
+
+>>> # Get data about each sector, this can also get data per industry
+>>> sector_data()
+
+                 1-Day Price Chg % Debt to Equity Div. Yield %   Market Cap  
+Basic Materials             24.348         64.748        3.186   238848.55B   
+Conglomerates                0.343         39.905        4.262     3740.09B   
+Consumer Goods              20.333         103.46        2.283  2112765.28B   
+Financial                   25.711        159.778         2.16   201348.83B   
+Healthcare                  -0.882         70.265        2.495    87071.67B   
+Industrial Goods            45.861        163.004         2.16   264448.05B   
+Services                   114.914        120.456        1.085   151329.32B   
+Technology                       1          44.66        3.387  1012212.01B   
+Utilities                    0.429        147.769         3.36    21777.19B   
+
+                 Net Profit Margin (mrq)     P/E  
+Basic Materials                    5.972  15.153   
+Conglomerates                        7.8    15.5   
+Consumer Goods                      5.62  17.053   
+Financial                         15.462  17.931   
+Healthcare                        13.197  13.326   
+Industrial Goods                    8.81  21.699   
+Services                           7.476  19.993   
+Technology                         6.439  25.909   
+Utilities                          6.026  24.572   
+
+                 Price To Free Cash Flow (mrq) Price to Book   ROE %  
+Basic Materials                        -20.554         2.399  12.171  
+Conglomerates                               -6          6.42    23.9  
+Consumer Goods                          -4.837         1.003   13.12  
+Financial                                4.681         1.703   9.307  
+Healthcare                              -3.197        19.746   13.66  
+Industrial Goods                        33.965        17.325    14.4  
+Services                                -8.127        -2.347  33.085  
+Technology                            -113.482         2.638   8.867  
+Utilities                              -89.242         2.577   7.235  
+
 ```
 
 
