@@ -24,6 +24,8 @@
 
 import os
 import datetime
+import pytz
+
 import cStringIO
 import csv
 import webbrowser
@@ -36,6 +38,18 @@ import pandas as pd
 
 
 class HistoricalData(pd.DataFrame):
+    """
+    Pandas DataFrame of historical data from Yahoo
+       index: DatetimeIndex, localized to UTC
+       columns: Yahoo CSV field Names
+    
+    params:
+        symbol: (str) ticker symbol
+        start_date: (datetime object/'YYYY-MM-DD' str) first tick date
+        end_date: (datetime object/'YYYY-MM-DD' str) last tick date
+        interval: (str) data frequency, default='d'
+            'd'=daily, 'w'=weekly, 'm'=monthly, 'v'=dividends only 
+    """
     
     def __init__(self, symbol, start_date, end_date, interval='d'):
         start_date = str(start_date)
@@ -53,8 +67,27 @@ class HistoricalData(pd.DataFrame):
         )  
         url += '&ignore=.csv'  
         data = pd.read_csv(url, index_col='Date', parse_dates=True).sort_index()
+        data.index = data.index.tz_localize(pytz.utc)
         super(HistoricalData, self).__init__(data)
-        self.symbol = symbol        
+        self.symbol = symbol
+
+
+class HistoryPanel(pd.Panel):
+    """
+    Pandas Panel of historical data from Yahoo
+        Items axis: ticker symbols
+        Major_axis: DatetimeIndex, localized to UTC
+        Minor Axis: Yahoo CSV field Names
+    
+    params: reference HistoricalData docstring
+        tickers: list of ticker symbols passed to HistoricalData
+    """
+    
+    def __init__(self, tickers, start_date, end_date, interval='d'):
+        data = {}
+        for i in tickers:
+            data[i] = HistoricalData(i, start_date, end_date, interval=interval)
+        super(HistoryPanel, self).__init__(data)
 
 
 class Stock(object):
@@ -149,18 +182,13 @@ class StockChart():
     required param: 
         ticker
     optional keyword args:
-        
         tspan: '1d', '5d', '3m', '6m', '1y', '2y', '5y', 'my' (max years)
-        
         type: 'l' ==> line,
               'b' ==> bar
               'c' ==> candle
-              
         scale: 'on' ==> logarithmic
                'off' ==> linear
-               
         size: 's', 'm', 'l'
-        
         avgs: moving average indicators.
             pass a list of day lengths as strings prepended
             with 'e' for exponential and 'm' for simple.
