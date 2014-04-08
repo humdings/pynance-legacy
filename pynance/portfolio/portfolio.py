@@ -131,9 +131,3 @@ class Portfolio():
         R = Risk(self.returns(adj_close=adj_close))
         Rm = self.bm_returns(adj_close=adj_close)
         return R.alpha(Rm, rfr)
-        
-        
-            
-
-        
-

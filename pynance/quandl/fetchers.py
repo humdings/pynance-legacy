@@ -1,6 +1,15 @@
 import Quandl
 
 
+def economic_indicator(source, country, indicator, **kwargs):
+    dataset = "{source}/{country}_{indicator}".format(
+        source=source.upper(),
+        country=country.upper(),
+        indicator=indicator.upper()
+    )
+    return Quandl.get(dataset, **kwargs)
+        
+
 class Fundamentals(object):
     '''
     Wrapper for the stock fundamentals portion
@@ -9,7 +18,7 @@ class Fundamentals(object):
     '''
     
     def __init__(self, symbol):
-        self.symbol = symbol
+        self.symbol = symbol.upper()
     
     def dataset_code(self, ratios):
         code = 'DMDRN/' + self.symbol
