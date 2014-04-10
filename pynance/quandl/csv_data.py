@@ -28,6 +28,7 @@ import pandas as pd
 from .. settings import (
     COMPANY_DIR, DATE_DIR, FIELD_DIR, all_files
 )
+from . fetchers import Fundamentals
 
 class DataManager:
     '''
